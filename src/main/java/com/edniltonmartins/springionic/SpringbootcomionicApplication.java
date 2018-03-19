@@ -78,11 +78,9 @@ public class SpringbootcomionicApplication implements CommandLineRunner{
 		Endereco endereco2 = new Endereco(null, "Avenida Matos", "105","Sala 800", "Centro", "38777012", cli1, cidade1);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
+		cli1.getTelefones().addAll(Arrays.asList("21292882772","11437892478"));
 		clienteRepository.save(cli1);
 		
 		enderecoRepository.save(Arrays.asList(endereco1,endereco2));
-		
-		
-		
 	}
 }
