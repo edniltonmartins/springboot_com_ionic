@@ -10,10 +10,10 @@ import com.edniltonmartins.springionic.repositories.CategoriaRepository;
 public class CategoriaService {
 
 	@Autowired
-	private CategoriaRepository repository;
+	private CategoriaRepository categoriaRepository;
 	
 	public Categoria buscar(Integer id) {
-		Categoria categoria = repository.findOne(id);
+		Categoria categoria = categoriaRepository.findOne(id);
 		return categoria;
 	}
 }
