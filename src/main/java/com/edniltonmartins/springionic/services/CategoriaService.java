@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.edniltonmartins.springionic.domain.Categoria;
 import com.edniltonmartins.springionic.repositories.CategoriaRepository;
+import com.edniltonmartins.springionic.services.exception.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -14,6 +15,9 @@ public class CategoriaService {
 	
 	public Categoria buscar(Integer id) {
 		Categoria categoria = categoriaRepository.findOne(id);
+		if (categoria==null) {
+			throw new ObjectNotFoundException("Categoria com id: " + id + " não foi encontrado.");
+		}
 		return categoria;
 	}
 }
