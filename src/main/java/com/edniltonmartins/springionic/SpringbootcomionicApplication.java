@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.edniltonmartins.springionic.domain.Categoria;
 import com.edniltonmartins.springionic.domain.Cidade;
+import com.edniltonmartins.springionic.domain.Cliente;
+import com.edniltonmartins.springionic.domain.Endereco;
 import com.edniltonmartins.springionic.domain.Estado;
 import com.edniltonmartins.springionic.domain.Produto;
+import com.edniltonmartins.springionic.domain.emuns.TipoCliente;
 import com.edniltonmartins.springionic.repositories.CategoriaRepository;
 import com.edniltonmartins.springionic.repositories.CidadeRepository;
+import com.edniltonmartins.springionic.repositories.ClienteRepository;
+import com.edniltonmartins.springionic.repositories.EnderecoRepository;
 import com.edniltonmartins.springionic.repositories.EstadoRepository;
 import com.edniltonmartins.springionic.repositories.ProdutoRepository;
 
@@ -31,6 +36,10 @@ public class SpringbootcomionicApplication implements CommandLineRunner{
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired 
+	private EnderecoRepository enderecoRepository;
 
 	@Override
 	public void run(String... arg0) throws Exception {
@@ -63,6 +72,17 @@ public class SpringbootcomionicApplication implements CommandLineRunner{
 		
 		estadoRepository.save(Arrays.asList(est1, est2));
 		cidadeRepository.save(Arrays.asList(cidade1,cidade2,cidade3));
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		Endereco endereco1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, cidade2);
+		Endereco endereco2 = new Endereco(null, "Avenida Matos", "105","Sala 800", "Centro", "38777012", cli1, cidade1);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
+		clienteRepository.save(cli1);
+		
+		enderecoRepository.save(Arrays.asList(endereco1,endereco2));
+		
+		
 		
 	}
 }
